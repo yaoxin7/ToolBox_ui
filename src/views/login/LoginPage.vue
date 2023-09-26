@@ -67,8 +67,8 @@ const rule = {
 // 登录按钮
 const onLogin = async () => {
   await formRef.value.validate()
-  await loginServer(formModel.value)
-  userStore.setToken(true)
+  const res = await loginServer(formModel.value)
+  userStore.setToken(res.data.data.token)
   ElMessage.success('登录成功')
   router.push('/')
 }

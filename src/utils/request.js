@@ -1,8 +1,10 @@
-import axios from "axios";
+import axios from "axios"
 import { ElMessage } from 'element-plus'
-import router from "../router/index.js";
+import router from "../router/index.js"
+import useUserStore from "../store/modules/userStore.js"
 
-const baseURL = ''
+const userStore = useUserStore();
+const baseURL = 'http://localhost:8080'
 
 const request = axios.create({
     baseURL,
@@ -12,6 +14,7 @@ const request = axios.create({
 request.interceptors.request.use(
     (config) => {
         config.withCredentials = true
+        config.headers['token'] = userStore.getToken()
         return config
     },
     (err) => Promise.reject(err)

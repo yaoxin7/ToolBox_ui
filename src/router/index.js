@@ -35,7 +35,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
     const userStore = useUserStore()
-    if (!userStore.hashToken && to.path !== '/login')
+    if (!userStore.haveToken() && to.path !== '/login')
         return '/login'
 })
 

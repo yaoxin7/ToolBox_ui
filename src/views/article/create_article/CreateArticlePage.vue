@@ -14,7 +14,7 @@ const formModel = ref({
   intro: '',
   status: '',
   type: '',
-  data_url: [""],
+  data_url: [],
 })
 const rules = []
 // MARKDOWN(0), TEXT(1), PICTURES(2), VIDEO(3)
@@ -75,7 +75,6 @@ const submitStatus = (status) => {
             <img v-if="formModel.cover_image_url" :src="baseURL + '/upload/' + formModel.cover_image_url" class="avatar"  alt="error"/>
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
           </UploadComp>
-          <el-input class="input_url" v-model="formModel.cover_image_url"></el-input>
         </el-form-item>
         <!--简介-->
         <el-form-item label="简介" prop="intro">
@@ -102,7 +101,6 @@ const submitStatus = (status) => {
           >
             <el-icon><Plus /></el-icon>
           </UploadComp>
-          <el-input class="input_url" v-model="formModel.data_url"></el-input>
         </el-form-item>
         <!-- 上传文件--视频&markdown -->
         <el-form-item v-else label="上传文件">
@@ -112,11 +110,6 @@ const submitStatus = (status) => {
               @upload-finish="formModel.data_url.push($event.data.url)">
             <el-button type="primary">选择文件</el-button>
           </UploadComp>
-          <el-input
-              class="input_url"
-              v-for="item in formModel.data_url.length"
-              v-model="formModel.data_url[item - 1]"
-          ></el-input>
         </el-form-item>
         <!--提交按钮-->
         <el-form-item>

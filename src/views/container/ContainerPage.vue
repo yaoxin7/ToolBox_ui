@@ -7,9 +7,11 @@ import { useRouter } from 'vue-router'
 import { ref, onMounted, computed } from "vue";
 import {ElMessage} from "element-plus";
 import NavComp from "./nav/NavComp.vue";
+import useUserStore from "../../store/modules/userStore";
 
 const router = useRouter()
 const userinfoStore = useUserinfoStore()
+const userStroe = useUserStore()
 
 // 获取当前页
 const currentRoute = computed(() =>
@@ -24,6 +26,7 @@ getUserInfo()
 // 退出登录
 const logout = async () => {
   await logoutServer()
+  userStroe.removeToken();
   ElMessage.success('已退出登录')
   router.push('/login')
 }
