@@ -56,7 +56,7 @@ const onSearch = () => {
       <div class="header_left">
         <div class="title">动态</div>
         <div class="button">
-          <el-button round :icon="Edit" type="danger" @click="router.push('/article/new')">发动态</el-button>
+          <el-button round :icon="Edit" type="danger" @click="router.push('/article/edit')">发动态</el-button>
         </div>
       </div>
       <div class="search">

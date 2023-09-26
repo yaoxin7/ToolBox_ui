@@ -3,8 +3,9 @@ import { ref } from 'vue'
 import {Plus} from "@element-plus/icons-vue";
 import {baseURL} from "../../../utils/request.js";
 import { ArrowLeftBold } from "@element-plus/icons-vue"
-import { publishArticleServer } from "../../../api/article.js";
+import {getArticleDetailServer, publishArticleServer, updateArticleServer} from "../../../api/article.js";
 import {useRouter} from "vue-router";
+import {uploadAvatarServer} from "../../../api/userinfo.js";
 
 const router = useRouter()
 const uploadFileRef = ref();
@@ -25,6 +26,19 @@ const selectOptions = [
   {label: 'markdown', value: 'MARKDOWN'}
 ]
 
+// TODO 编辑动态获取数据逻辑
+// 获取路径参数
+const  { id }  = router.currentRoute.value.params
+// 获取动态详情
+const getArticle = async () => {
+  const res = await getArticleDetailServer(id)
+  formModel.value = res.data.data
+  formModel.value.data_url = formModel.value.data_url.split(',')
+}
+if ( id ) {
+  getArticle()
+}
+
 const fileList = ref(formModel.value.data_url.map(url => {
   return {
     name: url,
@@ -38,8 +52,14 @@ const submitServer = async () => {
     ...formModel.value,
     data_url: formModel.value.data_url.join(',')
   }
-  await publishArticleServer(data)
-  ElMessage.success('发布成功')
+  if ( id ) {
+    await updateArticleServer(data)
+    ElMessage.success('更新成功')
+  } else
+  {
+    await publishArticleServer(data)
+    ElMessage.success('发布成功')
+  }
   router.back()
 }
 // 保存状态

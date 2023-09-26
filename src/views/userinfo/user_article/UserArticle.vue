@@ -72,6 +72,7 @@ const deleteArticle = async (id) => {
 }
 // TODO 跳转编辑动态
 const toEditArticle = (id) => {
+  router.push(`/article/edit/${id}`)
 }
 // TODO 处理点击
 const handleCommand = (command) => {

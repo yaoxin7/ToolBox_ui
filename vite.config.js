@@ -4,6 +4,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
+export const requestUrl = 'http://localhost:8080'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -19,12 +21,12 @@ export default defineConfig({
     https: false,
     proxy: {
       '/server': {
-        target: 'http://localhost:8080',
+        target: requestUrl,
         changeOrigin: true,
         ws: true
       },
       '/upload': {
-        target: 'http://localhost:8080',
+        target: requestUrl,
         changeOrigin: true,
         ws: true
       }

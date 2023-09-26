@@ -20,7 +20,7 @@ const routes = [
         children: [
             {path: '/article', component: ArticlePage},
             {path: '/userinfo', component: UserinfoPage},
-            {path: '/article/new', component: CreateArticlePage},
+            {path: '/article/edit/:id?', component: CreateArticlePage},
             {path: '/article/details/:id', component: ArticleDetails},
             {path: '/userinfo/edit', component: EditUserinfo}
         ]

@@ -31,3 +31,6 @@ export const deleteArticleServer = (article_id) => request.delete('/server/artic
             article_id
         }
     })
+
+// TODO 修改动态
+export const updateArticleServer = (data) => request.post('/server/article', data)
