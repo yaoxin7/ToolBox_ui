@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import useUserinfoStore from "../../../store/modules/useUserinfoStore.js";
 import {ArrowLeftBold, Plus} from "@element-plus/icons-vue";
 import {updateUserinfoServer, uploadAvatarServer} from "../../../api/userinfo.js";
+import EditPassword from "./components/editPassword.vue";
 
 const userinfoStore = useUserinfoStore()
 
@@ -66,6 +67,9 @@ const saveChange = () => {
 const cancelChange = () => {
   getUserInfo()
 }
+
+// TODO 修改密码弹窗
+const dialogVisible = ref(false)
 </script>
 
 <template>
@@ -89,6 +93,9 @@ const cancelChange = () => {
           <el-input v-model="formModel.bio" type="textarea"></el-input>
         </el-form-item>
         <el-form-item>
+          <el-button type="info" plain @click="dialogVisible = true">修改密码</el-button>
+        </el-form-item>
+        <el-form-item>
           <el-button @click="saveChange" type="danger" :disabled="isChange" round>保存</el-button>
           <el-button @click="cancelChange" type="info" :disabled="isChange" round>取消</el-button>
         </el-form-item>
@@ -106,6 +113,8 @@ const cancelChange = () => {
         <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
       </el-upload>
     </div>
+
+    <edit-password :dialogVisible="dialogVisible" @update:dialog-visible="dialogVisible=false"></edit-password>
   </el-card>
 
 </template>

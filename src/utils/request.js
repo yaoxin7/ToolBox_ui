@@ -4,7 +4,7 @@ import router from "../router/index.js"
 import useUserStore from "../store/modules/userStore.js"
 
 const userStore = useUserStore();
-const baseURL = ''
+const baseURL = "http://192.168.137.1:8080"
 
 const request = axios.create({
     baseURL,
